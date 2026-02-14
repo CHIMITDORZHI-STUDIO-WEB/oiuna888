@@ -382,6 +382,87 @@
             margin: 0 6px;
         }
 
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #0f1319;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+            animation: slideUp 0.4s ease forwards;
+        }
+
+        .cookie-banner.hidden {
+            display: none;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .cookie-banner p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .cookie-banner a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(196,148,74,0.3);
+            transition: border-color 0.3s ease;
+        }
+
+        .cookie-banner a:hover {
+            border-color: var(--accent);
+        }
+
+        .cookie-accept {
+            background: var(--accent);
+            color: #080b12;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.3s ease;
+        }
+
+        .cookie-accept:hover {
+            background: var(--accent-light);
+        }
+
+        /* Ссылка на политику в футере */
+        .footer-policy {
+            display: block;
+            margin-top: 8px;
+        }
+
+        .footer-policy a {
+            font-size: 9px;
+            color: #3a4250;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-policy a:hover {
+            color: var(--accent);
+        }
+
         /* Анимации появления */
         .fade-in {
             opacity: 0;
@@ -491,8 +572,24 @@
 
         <div class="footer fade-in">
             <span class="footer-text">Оюна Абрамитова <span class="footer-diamond">◆</span> 2025</span>
+            <span class="footer-policy"><a href="privacy.html">Политика конфиденциальности</a></span>
         </div>
     </div>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>Мы используем куки, чтобы сайт работал лучше. Оставаясь с нами, вы соглашаетесь с <a href="privacy.html">Политикой конфиденциальности</a>.</p>
+        <button class="cookie-accept" onclick="acceptCookies()">Принять</button>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            document.getElementById('cookieBanner').classList.add('hidden');
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+    </script>
 
 </body>
 </html>
